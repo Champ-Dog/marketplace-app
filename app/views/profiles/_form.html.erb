@@ -1,0 +1,22 @@
+<%= form_for(@profile) do |f| %>
+  <ul>
+  <% @profile.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+  <p>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :contact_number %><br />
+    <%= f.text_field :contact_number %>
+  </p>
+  <p>
+    <%= f.submit class: 'button is-primary' %>
+  </p>
+<% end %>
