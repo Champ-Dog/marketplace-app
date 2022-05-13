@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :update, :destroy, :edit]
+  before_action :set_profile, only: [:show, :update, :edit]
 
   def index
     @profiles = Profile.all
@@ -14,6 +14,17 @@ class ProfilesController < ApplicationController
 
   def create
     @profile = Profile.create(profile_params)
+    flash.notice = 'Profile Created'
+
+    redirect_to @profile
+  end
+
+  def edit
+  end
+
+  def update
+    @profile.update!(profile_params)
+    flash.notice = 'Details Updated!'
 
     redirect_to @profile
   end

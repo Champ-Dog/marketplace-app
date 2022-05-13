@@ -1,4 +1,9 @@
-<h1><%= @profile.username %></h1>
+<h1>Account Details</h1>
 
-<p>This will show merchant inventory</p>
-<%# Show inventory %>
+<p><%= @profile.username %></p>
+<p><%= @profile.name %></p>
+<p><%= @profile.contact_number %></p>
+
+<p>This might show merchant inventory</p>
+
+<%= link_to("Edit Informatiom", edit_profile_path(@profile), class: 'button is-warning') %>
