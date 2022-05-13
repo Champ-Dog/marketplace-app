@@ -3,7 +3,16 @@
 <p><%= @profile.username %></p>
 <p><%= @profile.name %></p>
 <p><%= @profile.contact_number %></p>
+<p><%= @profile.addresses %></p>
+
+<% (@profile.addresses).each do |address| %>
+  <p><%= address[:street_number] %></p>
+  <p><%= address.street_name %></p>
+  <p><%= address.suburb %></p>
+  <p><%= address.postcode %></p>
+  <p><%= address.state %></p>
+<% end %>
 
 <p>This might show merchant inventory</p>
 
-<%= link_to("Edit Informatiom", edit_profile_path(@profile), class: 'button is-warning') %>
+<%= link_to("Edit Information", edit_profile_path(@profile), class: 'button is-warning') %>

@@ -37,6 +37,6 @@ class ProfilesController < ApplicationController
 
 #   Used to handle and sanitise parameters to make new profiles
   def profile_params
-    return params.require(:profile).permit(:username, :name, :contact_number)
+    return params.require(:profile).permit(:username, :name, :contact_number, address_attributes: [:street_number, :street_name, :suburb, :postcode, :state])
   end
 end

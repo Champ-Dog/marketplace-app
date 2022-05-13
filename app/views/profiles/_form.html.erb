@@ -1,4 +1,6 @@
 <%= form_for(@profile) do |f| %>
+  
+  <%# Profile attributes %>
   <ul>
   <% @profile.errors.full_messages.each do |error| %>
     <li><%= error %></li>
@@ -14,8 +16,14 @@
   </p>
   <p>
     <%= f.label :contact_number %><br />
-    <%= f.text_field :contact_number %>
+    <%= f.number_field :contact_number %>
   </p>
+  
+  <%# Address attributes %>
+  <%= f.fields_for :address do |f| %>
+    <%= render 'address_fields', f: f %>
+  <% end %>
+
   <p>
     <%= f.submit class: 'button is-primary' %>
   </p>
