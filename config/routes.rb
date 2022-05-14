@@ -9,5 +9,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root to: "profile#index"
+  root to: "profiles#index"
 end
