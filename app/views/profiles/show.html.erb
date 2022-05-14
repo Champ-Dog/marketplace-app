@@ -1,17 +1,31 @@
 <h1>Account Details</h1>
-<section class='has-background-primary-light block'>
-  <p><%= 'USERNAME: ' + @profile.username %></p>
-  <p><%= 'NAME: ' + @profile.name %></p>
-  <p><%= 'CONTACT NUMBER: ' + "#{@profile.contact_number}" %></p>
+
+<%= cl_image_tag(@profile.profile_picture.key, crop: :scale, width: 150, cloud_name: 'champdogcode') if @profile.profile_picture.attached? %>
+
+<section class='block'>
+<table class='table'>
+    <tr>
+      <td><%= 'Username:' %></td>
+      <td><%= @profile.username %></td>
+    </tr>
+    <tr>
+      <td><%= 'Name:' %></td>
+      <td><%= @profile.name %></td>
+    </tr>
+    <tr>
+      <td><%= 'Contact Number:' %></td>
+      <td><%= @profile.contact_number %></td>
+    </tr>
+  </table>
   <%= link_to("Edit Information", edit_profile_path(@profile), class: 'button is-warning') %>
 </section>
 
 <br />
 
-<section class='block has-background-info-light'>
+<section class='block'>
   <h4>Addresses</h4>
   <% @profile.addresses.each do |address| %>
-    <div class="field has-background-primary-light">
+    <div class="field has-background-info-light">
       <p>
         <%= address.street_number %>
         <%= address.street_name %>

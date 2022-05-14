@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :update, :edit]
+  before_action :set_profile, only: [:show, :update, :edit, :destroy]
 
   def index
     @profiles = Profile.all
@@ -30,6 +30,11 @@ class ProfilesController < ApplicationController
     redirect_to @profile
   end
 
+  def destroy
+    @profile.profile_picture.purge
+    @profile.destroy
+  end
+
   private
 
   def set_profile
@@ -38,6 +43,6 @@ class ProfilesController < ApplicationController
 
 #   Used to handle and sanitise parameters to make new profiles
   def profile_params
-    return params.require(:profile).permit(:username, :name, :contact_number, address_attributes: [:street_number, :street_name, :suburb, :postcode, :state])
+    return params.require(:profile).permit(:username, :name, :contact_number, :profile_picture, address_attributes: [:street_number, :street_name, :suburb, :postcode, :state])
   end
 end

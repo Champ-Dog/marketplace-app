@@ -6,23 +6,25 @@
     <li><%= error %></li>
   <% end %>
   </ul>
-  <p>
+  
+  <fieldset class='field'>
+    <%= f.label :profile_picture %>
+    <%= f.file_field :profile_picture %>
+  </fieldset>
+  <fieldset class='field'>
     <%= f.label :username %><br />
     <%= f.text_field :username %>
-  </p>
-  <p>
+  </fieldset>
+  <fieldset class='field'>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-  </p>
-  <p>
+  </fieldset>
+  <fieldset class='field'>
     <%= f.label :contact_number %><br />
     <%= f.number_field :contact_number %>
-  </p>
+  </fieldset>
   
-  <%# Address attributes %>
-  <%= f.fields_for :address do |f| %>
-    <%= render 'address_fields', f: f %>
-  <% end %>
+
 
   <p>
     <%= f.submit class: 'button is-primary' %>
