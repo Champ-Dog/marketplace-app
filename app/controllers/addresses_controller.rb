@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+<<<<<<< HEAD
   before_action :get_profile
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
@@ -24,12 +25,26 @@ class AddressesController < ApplicationController
       flash.alert = @address.errors.full_messages.join('<br />')
       render 'new'
     end
+=======
+  before_action :set_address, only: [:show, :update, :edit, :destroy]
+
+  def show
+  end
+
+  def new
+    @address = Address.new
+  end
+
+  def create
+    @address = Address.create(address_params)
+>>>>>>> 7a3b07e (Address model created)
   end
 
   def edit
   end
 
   def update
+<<<<<<< HEAD
     begin
       @address.update!(address_params)
       redirect_to @profile
@@ -44,10 +59,14 @@ class AddressesController < ApplicationController
     @address.destroy
     redirect_to @profile
     flash.notice = 'Address Removed'
+=======
+    @address.update!(address_params)
+>>>>>>> 7a3b07e (Address model created)
   end
 
   private
 
+<<<<<<< HEAD
   def get_profile
     @profile = Profile.find(params[:profile_id])
   end
@@ -58,5 +77,14 @@ class AddressesController < ApplicationController
 
   def address_params
     return params.require(:address).permit(:profile_id, :street_number, :street_name, :suburb, :postcode, :state)
+=======
+  def set_address
+    @address = Address.find(params[:id])
+  end
+
+#   Used to handle and sanitise parameters to make new profiles
+  def profile_params
+    return params.require(:address).permit(:username, :name, :contact_number)
+>>>>>>> 7a3b07e (Address model created)
   end
 end
