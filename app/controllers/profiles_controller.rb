@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @profile = Profile.includes(:addresses).find(params[:id])
   end
 
   def new

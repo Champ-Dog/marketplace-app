@@ -1,18 +1,31 @@
 <h1>Account Details</h1>
+<section class='has-background-primary-light block'>
+  <p><%= 'USERNAME: ' + @profile.username %></p>
+  <p><%= 'NAME: ' + @profile.name %></p>
+  <p><%= 'CONTACT NUMBER: ' + "#{@profile.contact_number}" %></p>
+  <%= link_to("Edit Information", edit_profile_path(@profile), class: 'button is-warning') %>
+</section>
 
-<p><%= @profile.username %></p>
-<p><%= @profile.name %></p>
-<p><%= @profile.contact_number %></p>
-<p><%= @profile.addresses %></p>
+<br />
 
-<% (@profile.addresses).each do |address| %>
-  <p><%= address[:street_number] %></p>
-  <p><%= address.street_name %></p>
-  <p><%= address.suburb %></p>
-  <p><%= address.postcode %></p>
-  <p><%= address.state %></p>
-<% end %>
-
+<section class='block has-background-info-light'>
+  <h4>Addresses</h4>
+  <% @profile.addresses.each do |address| %>
+    <div class="field has-background-primary-light">
+      <p>
+        <%= address.street_number %>
+        <%= address.street_name %>
+        <%= address.suburb %>
+        <%= address.postcode %>
+        <%= address.state %>
+        <div class='field'>
+          <%= link_to("Edit", edit_profile_address_path(@profile, address), class: 'button is-warning is-small') %>
+          <%= button_to('Remove', [@profile, address], method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'button is-danger is-small') %>
+        </div>
+      </p>
+    </div>
+  <% end %>
+  <%= link_to('New Address', new_profile_address_path(@profile), class: "button is-primary") %><br />
+</section>
 <p>This might show merchant inventory</p>
 
-<%= link_to("Edit Information", edit_profile_path(@profile), class: 'button is-warning') %>

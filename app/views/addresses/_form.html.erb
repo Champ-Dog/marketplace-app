@@ -1,8 +1,8 @@
-<%= form_for(@address) do |f| %>
-  <ul>
-  <% @address.errors.full_messages.each do |error| %>
-    <li><%= error %></li>
-  <% end %>
+<%= form_with(model: [@profile, @address]) do |f| %>
+  <ul> 
+    <% @address.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
   </ul>
   <p>
     <%= f.label :street_number %><br />
