@@ -78,3 +78,5 @@ gem "devise", "~> 4.8"
 
 gem "cloudinary", "~> 1.23"
 gem "activestorage-cloudinary-service", "~> 0.2.3"
+
+gem "dotenv-rails", "~> 2.7"
