@@ -1,6 +1,6 @@
 <h1>Account Details</h1>
 
-<%= cl_image_tag(@profile.profile_picture.key, crop: :scale, width: 150, cloud_name: 'champdogcode' if @profile.profile_picture.attached? %>
+<%= cl_image_tag(@profile.profile_picture.key, crop: :scale, width: 150, cloud_name: 'champdogcode') if @profile.profile_picture.attached? %>
 
 <section class='block'>
 <table class='table'>
