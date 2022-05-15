@@ -4,7 +4,7 @@ class AddressesController < ApplicationController
 
 
   def index
-    @addresses = @profile.addresses
+    redirect_to @profile
   end
 
   def show
@@ -33,9 +33,9 @@ class AddressesController < ApplicationController
     begin
       @address.update!(address_params)
       redirect_to @profile
-      flash.notice = 'Details Updated!'
+
     rescue
-      flash.alert = @address.errors.full_messages.join('<br />').html_safe
+      flash.now[:alert] = @address.errors.full_messages.join('<br />')
       render 'edit' 
     end
   end

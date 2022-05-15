@@ -1,9 +1,5 @@
-<%= form_with(model: [@profile, @address]) do |f| %>
-  <ul> 
-    <% @address.errors.full_messages.each do |error| %>
-      <li><%= error %></li>
-    <% end %>
-  </ul>
+<%= form_with(model: [@profile, @address], data: {turbo: false}) do |f| %>
+
   <p>
     <%= f.label :street_number %><br />
     <%= f.text_field :street_number %>
