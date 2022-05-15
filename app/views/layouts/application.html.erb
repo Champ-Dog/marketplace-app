@@ -15,11 +15,28 @@
     <nav class="navbar has-background-warning-light" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item is-size-4" href="#">Hopper</a>
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <%# <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </a> %>
+      </div>
+      <div class="navbar-end">
+        <% if user_signed_in? %>
+          <div class="navbar-item">
+            <%= button_to 'Account', @profile, class: 'button is-primary is-small' %>
+          </div>
+          <div class="navbar-item">
+            <%= button_to 'Logout', destroy_user_session_path, class: 'button is-warning is-small', method: :delete, form: { data: { turbo_confirm: "Are you sure you want to log out? " } } %>
+          </div>
+        <% else %>
+          <div class="navbar-item">
+            <%= link_to 'Login', new_user_session_path, class: 'button is-primary is-small' %>
+          </div>
+          <div class="navbar-item">
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'button is-secondary is-small' %>
+          </div>
+        <% end %>
       </div>
     </nav>
 
