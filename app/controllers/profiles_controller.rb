@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
 
   def index
     @profiles = Profile.all
+    # authorize @profiles
   end
 
   def show
@@ -13,23 +14,33 @@ class ProfilesController < ApplicationController
 
   def new
     @profile = @user.profile.build
+    authorize @profile
   end
 
   def create
     @profile = @user.profile.build.create(profile_params)
-    flash.notice = 'Profile Created'
+    @profile.user = current_user
+    authorize @profile
 
-    redirect_to @profile
+    if @profile.save
+      redirect_to @profile
+      flash.notice = 'Profile Created'
+    else
+      flash.alert = @profile.errors.full_messages
+    end
   end
 
   def edit
   end
 
   def update
-    @profile.update!(profile_params)
-    flash.notice = 'Details Updated!'
-
-    redirect_to @profile
+    if @profile.update!(profile_params)
+      flash.notice = 'Details Updated!'
+      redirect_to @profile
+    else
+      render 'edit' 
+      flash.alert = @profile.errors.full_messages
+    end
   end
 
   def destroy
@@ -45,6 +56,7 @@ class ProfilesController < ApplicationController
 
   def set_profile
     @profile = @user.profile
+    authorize @profile
   end
 
   # Used to handle and sanitise parameters to make new profiles

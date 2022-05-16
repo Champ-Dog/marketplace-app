@@ -3,11 +3,15 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :users do
-   resources :profiles do
+  get '/profiles', to: 'profiles#index', as: 'profiles'
+  get '/profile/:id', to: 'profiles#show', as: 'profile'
+  get '/profiles/:id/edit', to: 'profiles#edit', as: 'edit_profile'
+
+  # resources :users do
+  #  resources :profiles do
     resources :addresses
-   end
-  end
+  #  end
+  # end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

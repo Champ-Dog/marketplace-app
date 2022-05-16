@@ -84,3 +84,5 @@ gem "dotenv-rails", "~> 2.7"
 gem "pg", "~> 1.3", :group => :production
 
 gem "rolify", "~> 6.0"
+
+gem "pundit", "~> 2.2"
