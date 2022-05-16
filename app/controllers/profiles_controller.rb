@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = @user.profile.includes(:addresses).find(params[:id])
+    # @profile = @user.profile.includes(:addresses).find(params[:id])
   end
 
   def new
@@ -44,10 +44,10 @@ class ProfilesController < ApplicationController
   end
 
   def set_profile
-    @profile = @user.profile 
+    @profile = @user.profile
   end
 
-#   Used to handle and sanitise parameters to make new profiles
+  # Used to handle and sanitise parameters to make new profiles
   def profile_params
     return params.require(:profile).permit(:user_id, :username, :name, :contact_number, :profile_picture, address_attributes: [:street_number, :street_name, :suburb, :postcode, :state])
   end

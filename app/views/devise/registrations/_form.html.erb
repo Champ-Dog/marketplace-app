@@ -1,0 +1,23 @@
+  <%# Takes input to create Profile details %>
+  <%= f.fields_for :profile do |pf| %>
+    <div class='field is-horizontal'>
+      <fieldset class='control'>
+        <%= pf.label :username %><br />
+        <%= pf.text_field :username, class: 'input' %>
+      </fieldset>
+    </div>
+    
+    <div class='field is-horizontal'>
+      <fieldset class='control'>
+        <%= pf.label :name %><br />
+        <%= pf.text_field :name, class: 'input'%>
+      </fieldset>
+    </div>
+    
+    <div class='field is-horizontal'>
+      <fieldset class='control'>
+        <%= pf.label :contact_number %><br />
+        <%= pf.number_field :contact_number, class: 'input'%>
+      </fieldset>
+    </div>
+  <% end %>

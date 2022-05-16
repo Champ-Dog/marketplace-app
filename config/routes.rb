@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   }
 
   resources :users do
-   resources :profiles do
+   resource :profiles do
     resources :addresses
    end
   end

@@ -1,9 +1,3 @@
 <h1>All Profiles - REMOVE BEFORE DEPLOYMENT</h1>
 
-<ul id="articles">
-  <% @profiles.each do |profile| %>
-    <li>
-      <%= link_to profile.username, profile %>
-    </li>
-  <% end %>
-</ul>
+<%= link_to 'Account', user_profiles_path, class: 'button is-primary is-small' %>

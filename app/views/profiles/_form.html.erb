@@ -1,4 +1,4 @@
-<%= form_for(@profile) do |f| %>
+<%= form_for user_profiles_path(@user, @profile) do |f| %>
   
   <%# Profile attributes %>
   <ul>
@@ -27,6 +27,6 @@
 
 
   <p>
-    <%= f.submit class: 'button is-primary' %>
+    <%= f.submit 'Update', class: 'button is-primary' %>
   </p>
 <% end %>
