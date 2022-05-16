@@ -50,7 +50,7 @@ class AddressesController < ApplicationController
   private
 
   def get_profile
-    @profile = Profile.find(params[:profile_id])
+    @profile = current_user.profile
   end
 
   def set_address

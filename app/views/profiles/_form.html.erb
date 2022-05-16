@@ -1,4 +1,4 @@
-<%= form_for user_profiles_path(@user, @profile) do |f| %>
+<%= form_with model: @profile do |f| %>
   
   <%# Profile attributes %>
   <ul>

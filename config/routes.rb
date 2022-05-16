@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/profiles', to: 'profiles#index', as: 'profiles'
   get '/profile/:id', to: 'profiles#show', as: 'profile'
   get '/profiles/:id/edit', to: 'profiles#edit', as: 'edit_profile'
+  patch 'profile/:id', to: 'profiles#update'
 
   # resources :users do
   #  resources :profiles do

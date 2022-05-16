@@ -21,7 +21,7 @@
       <td><%= @profile.contact_number %></td>
     </tr>
   </table>
-  <%= link_to("Edit Information", edit_address_path(@profile) class: 'button is-warning') %>
+  <%= link_to("Edit Information", edit_profile_path, class: 'button is-warning') %>
 </section>
 
 <br />
@@ -43,7 +43,5 @@
       </p>
     </div>
   <% end %>
-  <%= link_to('New Address', class: "button is-primary") %><br />
+  <%= link_to('New Address', new_address_path, class: "button is-primary") %><br />
 </section>
-<p>This might show merchant inventory</p>
-
