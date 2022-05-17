@@ -38,7 +38,7 @@ class ProfilesController < ApplicationController
       flash.notice = 'Details Updated!'
       redirect_to @profile
     else
-      render 'edit' 
+      render 'edit'
       flash.alert = @profile.errors.full_messages
     end
   end

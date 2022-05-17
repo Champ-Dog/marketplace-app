@@ -42,10 +42,10 @@
 
     <div class="content">
       <% if notice %>
-        <p class="notification is-success is-light"><%= notice %></p>
+        <p class="notification is-success is-light" id='notice'><%= notice %></p>
       <% end %>
       <% if alert %>
-        <p class="notification is-danger is-light"><%= alert %></p>
+        <p class="notification is-danger is-light" id='alert'><%= alert %></p>
       <% end %>
       <%= yield %>
     </div>

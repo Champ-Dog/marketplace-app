@@ -1,6 +1,7 @@
-<h1>Account Details</h1>
+<h1>Your Account</h1>
 
 <%= cl_image_tag(current_user.profile.profile_picture.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if current_user.profile.profile_picture.attached? %>
+<%= link_to("Security / Login Details", edit_user_registration_path, class: 'button is-warning') %>
 
 <section class='block'>
 <table class='table'>
@@ -11,10 +12,6 @@
     <tr>
       <td><%= 'Name:' %></td>
       <td><%= @profile.name %></td>
-    </tr>
-     <tr>
-      <td><%= 'Email:' %></td>
-      <td><%= current_user[:email] %></td>
     </tr>
     <tr>
       <td><%= 'Contact Number:' %></td>
@@ -37,7 +34,7 @@
         <%= address.postcode %>
         <%= address.state %>
         <div class='field'>
-          <%= link_to("Edit", class: 'button is-warning is-small') %>
+          <%= link_to('Edit', edit_address_path(address), class: 'button is-warning is-small') %>
           <%= button_to('Remove', method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'button is-danger is-small') %>
         </div>
       </p>

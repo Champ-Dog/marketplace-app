@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_profile
+  # before_action :get_profile
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
 
@@ -31,13 +31,11 @@ class AddressesController < ApplicationController
   end
 
   def update
-    begin
-      @address.update!(address_params)
+    if @address.update!(address_params)
       redirect_to @profile
-
-    rescue
-      flash.now[:alert] = @address.errors.full_messages.join('<br />')
-      render 'edit' 
+    else
+      render 'edit'
+      flash.alert = @address.errors.full_messages
     end
   end
 
@@ -54,7 +52,7 @@ class AddressesController < ApplicationController
   end
 
   def set_address
-    @address = @profile.addresses.find(params[:id])
+    @address = Address.find(params[:id])
   end
 
   def address_params

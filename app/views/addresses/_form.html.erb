@@ -1,26 +1,41 @@
 <%= form_with(model: @address) do |f| %>
 
-  <fieldset>
-    <%= f.label :street_number %><br />
-    <%= f.text_field :street_number %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :street_name %><br />
-    <%= f.text_field :street_name %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :suburb %><br />
-    <%= f.text_field :suburb %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :postcode %><br />
-    <%= f.number_field :postcode %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </fieldset>
-  <fieldset>
+  <div class='field is-horizontal'>
+    <fieldset class='control'>
+      <%= f.label :street_number %><br />
+      <%= f.text_field :street_number, class: 'input' %>
+    </fieldset>
+  </div>
+
+  <div class='field is-horizontal'>
+    <fieldset class='control'>
+      <%= f.label :street_name %><br />
+      <%= f.text_field :street_name, class: 'input' %>
+    </fieldset>
+  </div>
+
+  <div class='field is-horizontal'>
+    <fieldset class='control'>
+      <%= f.label :suburb %><br />
+      <%= f.text_field :suburb, class: 'input' %>
+    </fieldset>
+  </div>
+
+  <div class='field is-horizontal'>
+    <fieldset class='control'>
+      <%= f.label :postcode %><br />
+      <%= f.number_field :postcode, class: 'input' %>
+    </fieldset>
+  </div>
+
+  <div class='field'>
+    <div class='select'>
+      <%= f.select(:state, options_for_select([['State', nil], ['ACT', 'ACT'], ['NSW', 'NSW'], ['NT', 'NT'], ['QLD', 'QLD'], ['SA', 'SA'], ['TAS', 'TAS'], ['VIC', 'VIC'], ['WA', 'WA']], 8)) %><br />
+    </div>
+  </div>
+
+
+  <div class='actions'>
     <%= f.submit class: 'button is-primary' %>
-  </fieldset>
+  </div>
 <% end %>
