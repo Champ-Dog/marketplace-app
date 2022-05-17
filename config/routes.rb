@@ -4,19 +4,16 @@ Rails.application.routes.draw do
   }
 
   # Routes for Profiles
-  get '/profiles', to: 'profiles#index', as: 'profiles'
-  get '/profiles/:id', to: 'profiles#show', as: 'profile'
-  get '/profiles/:id/edit', to: 'profiles#edit', as: 'edit_profile'
-  patch '/profile/:id', to: 'profiles#update'
-
+  get 'profiles', to: 'profiles#show', as: 'profile'
+  get 'profiles/edit', to: 'profiles#edit', as: 'edit_profile'
+  patch 'profiles', to: 'profiles#update'
 
   # Routes for Addresses
-  get ':id/address/new', to: 'addresses#new', as: 'new_address'
-  get '/addresses', to: 'addresses#index', as: 'addresses'
-  post '/addresses', to: 'addresses#create'
-  get '/addresses/:id/edit', to: 'addresses#edit', as: 'edit_address'
-  get 'addresses/:id', to: 'addresses#show', as: 'address'
-  patch 'addresses/:id', to: 'addresses#update'
+  get 'addresses/new', to: 'addresses#new', as: 'new_address'
+  post 'addresses', to: 'addresses#create'
+  get 'addresses/:id/edit', to: 'addresses#edit', as: 'edit_address'
+  get 'addresses/', to: 'addresses#show', as: 'address'
+  patch '/addresses/:id', to: 'addresses#update'
 
   # resources :users do
   #  resources :profiles do
@@ -28,5 +25,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root to: "profiles#index"
+  root to: "profiles#show"
 end

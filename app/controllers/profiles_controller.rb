@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_user
-  before_action :set_profile, only: [:show, :update, :edit, :destroy]
+  before_action :set_profile, only: [:new, :show, :update, :edit, :destroy]
 
   def index
     @profiles = Profile.all
@@ -13,13 +12,12 @@ class ProfilesController < ApplicationController
   end
 
   def new
-    @profile = @user.profile.build
+    @profile.build
     authorize @profile
   end
 
   def create
-    @profile = @user.profile.build.create(profile_params)
-    @profile.user = current_user
+    @profile.build.create(profile_params)
     authorize @profile
 
     if @profile.save
@@ -35,11 +33,11 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update!(profile_params)
-      flash.notice = 'Details Updated!'
+      flash.now[:notice] = 'Details Updated!'
       redirect_to @profile
     else
       render 'edit'
-      flash.alert = @profile.errors.full_messages
+      flash.now[:alert] = @profile.errors.full_messages.join('<br>').html_safe
     end
   end
 
@@ -50,12 +48,8 @@ class ProfilesController < ApplicationController
 
   private
 
-  def get_user
-    @user = current_user
-  end
-
   def set_profile
-    @profile = @user.profile
+    @profile = current_user.profile
     authorize @profile
   end
 

@@ -1,7 +1,9 @@
 <h1>Your Account</h1>
 
-<%= cl_image_tag(current_user.profile.profile_picture.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if current_user.profile.profile_picture.attached? %>
 <%= link_to("Security / Login Details", edit_user_registration_path, class: 'button is-warning') %>
+<br />
+<br />
+<%= cl_image_tag(current_user.profile.profile_picture.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if current_user.profile.profile_picture.attached? %>
 
 <section class='block'>
 <table class='table'>
@@ -27,7 +29,6 @@
   <h4>Addresses</h4>
   <% @profile.addresses.each do |address| %>
     <div class="field has-background-info-light">
-      <p>
         <%= address.street_number %>
         <%= address.street_name %>
         <%= address.suburb %>
@@ -37,7 +38,6 @@
           <%= link_to('Edit', edit_address_path(address), class: 'button is-warning is-small') %>
           <%= button_to('Remove', method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'button is-danger is-small') %>
         </div>
-      </p>
     </div>
   <% end %>
   <%= link_to('New Address', new_address_path, class: "button is-primary") %><br />
