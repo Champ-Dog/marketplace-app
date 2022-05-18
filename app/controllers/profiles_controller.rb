@@ -18,7 +18,6 @@ class ProfilesController < ApplicationController
 
     if @profile.save
       redirect_to @profile
-      flash[:notice] = 'Profile Created'
     else
       flash[:alert] = @profile.errors.full_messages
     end
