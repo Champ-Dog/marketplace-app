@@ -36,7 +36,7 @@
         <%= address.state %>
         <div class='field'>
           <%= link_to('Edit', edit_address_path(address), class: 'button is-warning is-small') %>
-          <%= button_to('Remove', method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'button is-danger is-small') %>
+          <%= button_to('Remove', address_path(address), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'button is-danger is-small') %>
         </div>
     </div>
   <% end %>

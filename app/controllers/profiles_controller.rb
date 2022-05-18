@@ -1,11 +1,9 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile, only: [:new, :show, :update, :edit, :destroy]
+  before_action :check_auth
 
-  def index
-    @profiles = Profile.all
-    # authorize @profiles
-  end
+  after_action :verify_authorized
 
   def show
     # @profile = @user.profile.includes(:addresses).find(params[:id])
@@ -13,12 +11,10 @@ class ProfilesController < ApplicationController
 
   def new
     @profile.build
-    authorize @profile
   end
 
   def create
     @profile.build.create(profile_params)
-    authorize @profile
 
     if @profile.save
       redirect_to @profile
@@ -48,9 +44,12 @@ class ProfilesController < ApplicationController
 
   private
 
+  def check_auth
+    authorize @profile
+  end
+
   def set_profile
     @profile = current_user.profile
-    authorize @profile
   end
 
   # Used to handle and sanitise parameters to make new profiles

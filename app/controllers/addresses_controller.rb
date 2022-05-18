@@ -1,7 +1,10 @@
 class AddressesController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_profile, not: [:edit]
+  before_action :set_profile, only: [:show, :new, :create, :update, :destroy]
   before_action :set_address, only: [:show, :edit, :update, :destroy]
+  before_action :check_auth
+
+  after_action :verify_authorized
 
   def show
     redirect_to @profile
@@ -43,7 +46,11 @@ class AddressesController < ApplicationController
 
   private
 
-  def get_profile
+  def check_auth
+    authorize Address
+  end
+
+  def set_profile
     @profile = current_user.profile
   end
 
