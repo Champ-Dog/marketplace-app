@@ -18,9 +18,9 @@ class ProfilesController < ApplicationController
 
     if @profile.save
       redirect_to @profile
-      flash.notice = 'Profile Created'
+      flash[:notice] = 'Profile Created'
     else
-      flash.alert = @profile.errors.full_messages
+      flash[:alert] = @profile.errors.full_messages
     end
   end
 
@@ -28,12 +28,13 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if @profile.update!(profile_params)
-      flash.now[:notice] = 'Details Updated!'
+    begin
+     @profile.update!(profile_params)
+      flash[:notice] = 'Details Updated!'
       redirect_to @profile
-    else
+    rescue
+      flash[:alert] = @profile.errors.full_messages.join('<br>').html_safe
       render 'edit'
-      flash.now[:alert] = @profile.errors.full_messages.join('<br>').html_safe
     end
   end
 

@@ -19,8 +19,9 @@ class AddressesController < ApplicationController
 
     if @address.save
       redirect_to @profile
+      flash[:notice] = 'Address added'
     else
-      flash.now[:alert] = @address.errors.full_messages.join('<br />').html_safe
+      flash.now[:notice] = @address.errors.full_messages.join('<br />').html_safe
       render 'new'
     end
   end
@@ -33,8 +34,8 @@ class AddressesController < ApplicationController
       @address.update!(address_params)
       redirect_to @profile
     rescue
+      flash[:alert] = @address.errors.full_messages.join('<br>').html_safe
       render 'edit'
-      flash.now[:alert] = @address.errors.full_messages.join('<br>').html_safe
     end
   end
 
