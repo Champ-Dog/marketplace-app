@@ -3,10 +3,6 @@ class AddressPolicy < ApplicationPolicy
     return true if user.present? && user.profile == record.profile
   end
 
-  # def edit?
-  #   return true if user.present? && user.profile == record.profile
-  # end
-
   def create?
     return true if user.present?
   end

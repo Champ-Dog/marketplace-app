@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   }
 
   # Routes for Profiles
-  get 'profiles/:id', to: 'profiles#show', as: 'profile'
   get 'profiles/edit', to: 'profiles#edit', as: 'edit_profile'
-  patch 'profiles', to: 'profiles#update'
+  get 'profiles/:id', to: 'profiles#show', as: 'profile'
+  patch 'profiles/:id', to: 'profiles#update'
 
   # Routes for Addresses
   get 'addresses/new', to: 'addresses#new', as: 'new_address'

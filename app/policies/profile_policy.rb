@@ -1,6 +1,7 @@
 class ProfilePolicy < ApplicationPolicy
+
   def show?
-    return true if user.present? && user == record.user
+    owner?
   end
 
   def create?
@@ -8,6 +9,13 @@ class ProfilePolicy < ApplicationPolicy
   end
 
   def update?
+    owner?
+  end
+
+  private
+
+  def owner?
     return true if user.present? && user == record.user
   end
+
 end
