@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_15_050234) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_20_031908) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_15_050234) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -51,14 +51,42 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_15_050234) do
     t.index ["profile_id"], name: "index_addresses_on_profile_id"
   end
 
+  create_table "coffees", force: :cascade do |t|
+    t.string "name"
+    t.string "origin"
+    t.string "description"
+    t.string "roast_type"
+    t.float "price"
+    t.integer "inventory_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inventory_id"], name: "index_coffees_on_inventory_id"
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_inventories_on_profile_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "username"
     t.string "name"
     t.integer "contact_number"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "profiles_roles", id: false, force: :cascade do |t|
+    t.integer "profile_id"
+    t.integer "role_id"
+    t.index ["profile_id", "role_id"], name: "index_profiles_roles_on_profile_id_and_role_id"
+    t.index ["profile_id"], name: "index_profiles_roles_on_profile_id"
+    t.index ["role_id"], name: "index_profiles_roles_on_role_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -84,16 +112,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_15_050234) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
-    t.index ["role_id"], name: "index_users_roles_on_role_id"
-    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
-    t.index ["user_id"], name: "index_users_roles_on_user_id"
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "profiles"
+  add_foreign_key "coffees", "inventories"
+  add_foreign_key "inventories", "profiles"
   add_foreign_key "profiles", "users"
 end

@@ -1,5 +1,14 @@
   <%# Takes input to create Profile details %>
   <%= f.fields_for :profile do |pf| %>
+    <div>
+      <fieldset class='control'>
+        <%= pf.radio_button :role, "merchant"%>
+        <%= pf.label :role_merchant, "merchant" %>
+        <%= pf.radio_button :role, "buyer"%>
+        <%= pf.label :role_buyer, "buyer" %><br />
+      </fieldset>
+    </div>
+    
     <div class='field is-horizontal'>
       <fieldset class='control'>
         <%= pf.label :username %><br />

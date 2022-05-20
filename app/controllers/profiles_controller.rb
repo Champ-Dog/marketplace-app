@@ -16,6 +16,7 @@ class ProfilesController < ApplicationController
   def create
     @profile.build.create(profile_params)
 
+    @user.add_role params[:role]
     if @profile.save
       redirect_to @profile
     else

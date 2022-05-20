@@ -7,8 +7,7 @@
   <%= f.fields_for :profile do |pf| %>
     <div class='field is-horizontal'>
       <fieldset class='control'>
-        <%= pf.label :username %><br />
-        <%= pf.text_field :username, class: 'input' %>
+        <%= pf.select :roles, options_from_collection_for_select(Role.all,"merchant","customer") %>
       </fieldset>
     </div>
     
