@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'profiles/edit', to: 'profiles#edit', as: 'edit_profile'
   get 'profiles/:id', to: 'profiles#show', as: 'profile'
   patch 'profiles/:id', to: 'profiles#update'
+  patch 'profiles/:id/merchant', to: 'profiles#merchant', as: 'profile_merchant'
+  patch 'profiles/:id/customer', to: 'profiles#customer', as: 'profile_customer'
 
   # Routes for Addresses
   get 'addresses/new', to: 'addresses#new', as: 'new_address'

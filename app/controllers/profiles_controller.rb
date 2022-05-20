@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_profile, only: [:new, :show, :update, :edit, :destroy]
+  before_action :set_profile
   before_action :check_auth
 
   after_action :verify_authorized
@@ -16,12 +16,21 @@ class ProfilesController < ApplicationController
   def create
     @profile.build.create(profile_params)
 
-    @user.add_role params[:role]
     if @profile.save
       redirect_to @profile
     else
       flash[:alert] = @profile.errors.full_messages
     end
+  end
+
+  def merchant
+    @profile.add_role :merchant
+    redirect_to @profile
+  end
+
+  def customer
+    @profile.add_role :customer
+    redirect_to @profile
   end
 
   def edit
@@ -55,6 +64,6 @@ class ProfilesController < ApplicationController
 
   # Used to handle and sanitise parameters to make new profiles
   def profile_params
-    return params.require(:profile).permit(:user_id, :username, :name, :contact_number, :profile_picture, address_attributes: [:street_number, :street_name, :suburb, :postcode, :state])
+    return params.require(:profile).permit(:user_id, :roles, :username, :name, :contact_number, :profile_picture, address_attributes: [:street_number, :street_name, :suburb, :postcode, :state])
   end
 end

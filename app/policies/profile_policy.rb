@@ -12,6 +12,14 @@ class ProfilePolicy < ApplicationPolicy
     owner?
   end
 
+  def merchant?
+    owner? && (record.has_any_role? :merchant, :customer) == false
+  end
+
+  def customer?
+    owner? && (record.has_any_role? :merchant, :customer) == false
+  end
+
   private
 
   def owner?
