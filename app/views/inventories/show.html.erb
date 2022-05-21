@@ -1,7 +1,7 @@
 <h1><%= @inventory.profile[:username] %></h1>
 
 <section class='block'>
-  <h4>Coffees</h4>
+  <h4>Inventory</h4>
   <% @inventory.coffees.each do |coffee| %>
     <div class="field has-background-info-light">
     <%= cl_image_tag(coffee.coffee_image.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if coffee.coffee_image.attached? %><br />

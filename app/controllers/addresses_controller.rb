@@ -42,7 +42,7 @@ class AddressesController < ApplicationController
   def destroy
     @address.destroy
     redirect_to @profile
-    flash.notice = 'Address Removed'
+    flash[:notice] = 'Address Removed'
   end
 
   private

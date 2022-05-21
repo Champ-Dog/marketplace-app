@@ -1,5 +1,5 @@
 class CoffeesController < ApplicationController
-  before_action :set_inventory, only: [:new, :create, :update]
+  before_action :set_inventory, only: [:new, :create, :update, :destroy]
   before_action :set_coffee, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -30,6 +30,12 @@ class CoffeesController < ApplicationController
       render 'edit'
     end
   end
+
+  def destroy
+    @coffee.destroy
+    redirect_to @inventory
+    flash[:notice] = 'Coffee Removed'
+  end 
 
   private
 

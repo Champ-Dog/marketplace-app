@@ -25,8 +25,8 @@ Rails.application.routes.draw do
   get 'coffees/new', to: 'coffees#new', as: 'new_coffee'
   post 'coffees', to: 'coffees#create'
   get 'coffees/:id/edit', to: 'coffees#edit', as: 'edit_coffee'
-  get 'coffees/:id', to: 'coffee#show', as: 'coffee'
-  delete 'coffees/:id', to: 'coffee#destroy'
+  get 'coffees/:id', to: 'coffees#show', as: 'coffee'
+  delete 'coffees/:id', to: 'coffees#destroy'
   patch '/coffees/:id', to: 'coffees#update'
   post 'coffees/:id/edit', to: 'coffees#update'
 
