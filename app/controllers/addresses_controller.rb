@@ -33,8 +33,8 @@ class AddressesController < ApplicationController
     begin
       @address.update!(address_params)
       redirect_to @profile
-    rescue
-      flash[:alert] = @address.errors.full_messages.join('<br>').html_safe
+    rescue StandardError => e
+      flash[:alert] = e.join('<br>').html_safe
       render 'edit'
     end
   end
@@ -60,6 +60,6 @@ class AddressesController < ApplicationController
   end
 
   def address_params
-    return params.require(:address).permit(:id, :street_number, :street_name, :suburb, :postcode, :state)
+    return params.require(:address).permit(:street_number, :street_name, :suburb, :postcode, :state)
   end
 end

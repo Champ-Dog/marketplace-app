@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   delete 'addresses/:id', to: 'addresses#destroy'
   patch '/addresses/:id', to: 'addresses#update'
 
-  # resources :addresses
+  # Routes for Inventories
+  get 'inventories/:id', to: 'inventories#show', as: 'inventory'
+
+  # Routes for Inventories
+  # get 'inventories/new', to: 'inventories#new', as: 'new_inventory'
 
 
   # resources :users do

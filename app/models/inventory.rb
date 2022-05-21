@@ -3,5 +3,5 @@ class Inventory < ApplicationRecord
 
   has_many :coffees, dependent: :destroy
 
-  validates :quantity, presence: true
+  # validates :quantity, presence: true
 end

@@ -23,11 +23,14 @@ class ProfilesController < ApplicationController
     end
   end
 
+  # Adds merchant role to profile and creates inventory
   def merchant
     @profile.add_role :merchant
+    @profile.create_inventory!
     redirect_to @profile
   end
 
+  # Adds customer roles to profile
   def customer
     @profile.add_role :customer
     redirect_to @profile
