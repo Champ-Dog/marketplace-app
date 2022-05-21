@@ -21,9 +21,14 @@ Rails.application.routes.draw do
   # Routes for Inventories
   get 'inventories/:id', to: 'inventories#show', as: 'inventory'
 
-  # Routes for Inventories
-  # get 'inventories/new', to: 'inventories#new', as: 'new_inventory'
-
+  # Routes for Coffees
+  get 'coffees/new', to: 'coffees#new', as: 'new_coffee'
+  post 'coffees', to: 'coffees#create'
+  get 'coffees/:id/edit', to: 'coffees#edit', as: 'edit_coffee'
+  get 'coffees/:id', to: 'coffee#show', as: 'coffee'
+  delete 'coffees/:id', to: 'coffee#destroy'
+  patch '/coffees/:id', to: 'coffees#update'
+  post 'coffees/:id/edit', to: 'coffees#update'
 
   # resources :users do
   #  resources :profiles do

@@ -42,15 +42,15 @@
     <h4>Addresses</h4>
     <% @profile.addresses.each do |address| %>
       <div class="field has-background-info-light">
-          <%= address.street_number %>
-          <%= address.street_name %>
-          <%= address.suburb %>
-          <%= address.postcode %>
-          <%= address.state %>
-          <div class='field'>
-            <%= link_to('Edit', edit_address_path(address), class: 'button is-warning is-small') %>
-            <%= button_to('Remove', address_path(address), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'button is-danger is-small') %>
-          </div>
+        <%= address.street_number %>
+        <%= address.street_name %>
+        <%= address.suburb %>
+        <%= address.postcode %>
+        <%= address.state %>
+        <div class='field'>
+          <%= link_to('Edit', edit_address_path(address), class: 'button is-warning is-small') %>
+          <%= button_to('Remove', address_path(address), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'button is-danger is-small') %>
+        </div>
       </div>
     <% end %>
     <%= link_to('New Address', new_address_path, class: "button is-primary") %><br />

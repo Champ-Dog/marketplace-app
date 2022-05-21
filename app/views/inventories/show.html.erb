@@ -1,1 +1,26 @@
 <h1><%= @inventory.profile[:username] %></h1>
+
+<section class='block'>
+  <h4>Coffees</h4>
+  <% @inventory.coffees.each do |coffee| %>
+    <div class="field has-background-info-light">
+    <%= cl_image_tag(coffee.coffee_image.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if coffee.coffee_image.attached? %><br />
+    <%= 'Coffee:' %>
+    <%= coffee.origin %>
+    <%= coffee.name %><br />
+    <%= 'Price:' %>
+    <%= coffee.price %><br />
+    <%= 'Description:' %>
+    <%= coffee.description %><br />
+    <%= 'Roast:' %>
+    <%= coffee.roast_type %><br />
+    <div class='field'>
+        <%= link_to('Edit', edit_coffee_path(coffee), class: 'button is-warning is-small') %>
+        <%= button_to('Remove', coffee_path(coffee), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'button is-danger is-small') %>
+    </div>
+    </div>
+  <% end %>
+  <%= link_to('Add Coffee', new_coffee_path, class: "button is-primary") %><br />
+</section>
+
+

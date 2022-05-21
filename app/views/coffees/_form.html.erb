@@ -1,0 +1,47 @@
+<%= form_with(model: @coffee, data: {turbo: false}) do |f| %>
+ 
+  <div class='field'>
+    <fieldset class='control'>
+        <%= f.label :coffe_image %><br />
+        <%= f.file_field :coffee_image %>
+    </fieldset>
+  </div>
+
+  <div class='field is-horizontal'>
+    <fieldset class='control'>
+      <%= f.label :name %><br />
+      <%= f.text_field :name, class: 'input' %>
+    </fieldset>
+  </div>
+
+  <div class='field is-horizontal'>
+    <fieldset class='control'>
+      <%= f.label :origin %><br />
+      <%= f.text_field :origin, class: 'input' %>
+    </fieldset>
+  </div>
+
+  <div class='field is-horizontal'>
+    <fieldset class='control'>
+      <%= f.label :description %><br />
+      <%= f.text_field :description, class: 'input' %>
+    </fieldset>
+  </div>
+
+  <div class='field is-horizontal'>
+    <fieldset class='control'>
+      <%= f.label :price %><br />
+      <%= f.number_field :price, class: 'input' %>
+    </fieldset>
+  </div>
+
+  <div class='field'>
+    <div class='select'>
+      <%= f.select(:roast_type, options_for_select([['Roast Style', nil], ['Espresso', 'Espresso'], ['Filter', 'Filter'], ['Omni', 'Omni']], 4)) %><br />
+    </div>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit class: 'button is-primary' %>
+  </div>
+<% end %>
