@@ -1,10 +1,10 @@
-class AddressPolicy < ApplicationPolicy
-  def show?
-    owner?
+class CoffeePolicy < ApplicationPolicy
+  def index?
+    true
   end
 
   def create?
-    return true if user.present?
+   merchant?
   end
 
   def update?
@@ -17,8 +17,12 @@ class AddressPolicy < ApplicationPolicy
 
   private
 
+  def merchant?
+    user.profile.has_role? :merchant
+  end
+
   def owner?
-    return true if user.present? && user.profile == record.profile
+    return true if user.present? && merchant? && user.profile.inventory == record.inventory
   end
 
 

@@ -18,28 +18,17 @@ Rails.application.routes.draw do
   delete 'addresses/:id', to: 'addresses#destroy'
   patch '/addresses/:id', to: 'addresses#update'
 
-  # Routes for Inventories
+  # Routes for Inventories. These *only* need to be created.
   get 'inventories/:id', to: 'inventories#show', as: 'inventory'
 
   # Routes for Coffees
+  get 'coffees', to: 'coffees#index'
   get 'coffees/new', to: 'coffees#new', as: 'new_coffee'
   post 'coffees', to: 'coffees#create'
   get 'coffees/:id/edit', to: 'coffees#edit', as: 'edit_coffee'
-  get 'coffees/:id', to: 'coffees#show', as: 'coffee'
-  delete 'coffees/:id', to: 'coffees#destroy'
-  patch '/coffees/:id', to: 'coffees#update'
   post 'coffees/:id/edit', to: 'coffees#update'
-  get 'coffees', to: 'coffees#index'
+  delete 'coffees/:id', to: 'coffees#destroy', as: 'coffee'
+  patch '/coffees/:id', to: 'coffees#update'
 
-  # resources :users do
-  #  resources :profiles do
-    # resources :addresses
-  #  end
-  # end
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
   root to: 'coffees#index'
 end

@@ -1,6 +1,8 @@
 class CoffeesController < ApplicationController
-  before_action :set_inventory, only: [:new, :create, :update, :destroy]
   before_action :set_coffee, only: [:show, :edit, :update, :destroy]
+  before_action :check_auth
+  before_action :authenticate_user!, except: [:index]
+  before_action :set_inventory, only: [:new, :create, :update, :destroy]
 
   def new
     @coffee = @inventory.coffees.build
@@ -45,6 +47,10 @@ class CoffeesController < ApplicationController
 
   def set_coffee
     @coffee = Coffee.find(params[:id])
+  end
+
+  def check_auth
+    authorize @coffee
   end
 
   def coffee_params

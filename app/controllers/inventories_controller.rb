@@ -1,5 +1,6 @@
 class InventoriesController < ApplicationController
-#   before_action :authenticate_user!
+  before_action :authenticate_user!
+  before_action :check_auth
   before_action :set_profile, only: [:show]
   before_action :set_inventory
 
@@ -9,22 +10,6 @@ class InventoriesController < ApplicationController
     @inventory = current_user.profile.inventory
   end
 
-#   def new
-#     @inventory = @profile.build_inventory
-#   end
-
-#   def create
-#     @inventory = @profile.build_inventory
-
-#     if @inventory.save
-#       redirect_to @profile
-#       flash[:notice] = 'Merchant account configured'
-#     else
-#       flash.now[:notice] = @inventory.errors.full_messages.join('<br />').html_safe
-#       redirect_to @profile
-#     end
-#   end
-
   private
 
   def set_profile
@@ -33,5 +18,9 @@ class InventoriesController < ApplicationController
 
   def set_inventory
     @inventory = Inventory.find(params[:id])
+  end
+
+  def check_auth
+    authorize Inventory
   end
 end
