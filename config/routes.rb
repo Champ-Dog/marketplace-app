@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   delete 'coffees/:id', to: 'coffees#destroy'
   patch '/coffees/:id', to: 'coffees#update'
   post 'coffees/:id/edit', to: 'coffees#update'
+  get 'coffees', to: 'coffees#index'
 
   # resources :users do
   #  resources :profiles do
@@ -40,5 +41,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root to: "profiles#show"
+  root to: 'coffees#index'
 end

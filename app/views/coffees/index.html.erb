@@ -1,0 +1,17 @@
+<h1>The Coffee Bazaar</h1>
+
+<div class="tile is-ancestor is-flex-wrap-wrap is-justify-content-space-around">
+  <% Coffee.all.each do |coffee| %>
+    <div class='tile is-5 is-vertical m-3'>
+      <div class='is-child has-background-info-light has-text-centered is-flex-direction-column'>
+        <figure class='image m-2 is-inline-block', style='max-width:20vw'>
+          <%= cl_image_tag(coffee.coffee_image.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if coffee.coffee_image.attached? %>
+        </figure>
+        <p class='title is-flex is-justify-content-center'><%= "#{coffee.origin}" + " #{coffee.name}"  %></p>
+        <p class='is-flex is-justify-content-center'><%= coffee.roast_type %></p>
+        <p class='is-flex is-justify-content-center'><%= coffee.price %></p>
+        <div class='is-flex is-justify-content-center'><%= link_to("Add to Cart", root_path, class: 'button is-success') %></div>
+      </div>
+    </div>
+  <% end %>
+</div>

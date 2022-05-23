@@ -15,7 +15,7 @@
   <%= cl_image_tag(@profile.profile_picture.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if current_user.profile.profile_picture.attached? %>
 
   <section class='block'>
-  <table class='table'>
+    <table class='table'>
       <tr>
         <td><%= 'Account Type:' %></td>
         <td><%= @profile.roles[0].name.capitalize %></td>
@@ -32,7 +32,7 @@
         <td><%= 'Contact Number:' %></td>
         <td><%= @profile.contact_number %></td>
       </tr>
-    </table>
+      </table>
     <%= link_to("Edit Information", edit_profile_path(@profile), class: 'button is-warning') %>
   </section>
 
