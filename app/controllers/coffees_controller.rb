@@ -34,6 +34,7 @@ class CoffeesController < ApplicationController
   end
 
   def destroy
+    @coffee.coffee_image.purge
     @coffee.destroy
     redirect_to @inventory
     flash[:notice] = 'Coffee Removed'

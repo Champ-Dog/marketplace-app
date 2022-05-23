@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_20_031908) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_225255) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_031908) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_addresses_on_profile_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "profile_id_id", null: false
+    t.integer "cofee_id_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cofee_id_id"], name: "index_carts_on_cofee_id_id"
+    t.index ["profile_id_id"], name: "index_carts_on_profile_id_id"
   end
 
   create_table "coffees", force: :cascade do |t|
@@ -115,6 +125,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_031908) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "profiles"
+  add_foreign_key "carts", "cofee_ids"
+  add_foreign_key "carts", "profile_ids"
   add_foreign_key "coffees", "inventories"
   add_foreign_key "inventories", "profiles"
   add_foreign_key "profiles", "users"
