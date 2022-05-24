@@ -67,6 +67,8 @@ class ProfilesController < ApplicationController
 
   # Used to handle and sanitise parameters to make new profiles
   def profile_params
-    return params.require(:profile).permit(:user_id, :roles, :username, :name, :contact_number, :profile_picture, address_attributes: [:street_number, :street_name, :suburb, :postcode, :state])
+    return params.require(:profile).permit(:user_id, :roles, :username, :name, :contact_number, :profile_picture)
+      # Commented as I don't think this is necessary now that Addresses aren't nested
+      # , address_attributes: [:street_number, :street_name, :suburb, :postcode, :state])
   end
 end

@@ -1,0 +1,29 @@
+<h1><%= "#{@coffee.origin} #{@coffee.name}" %></h1>
+
+<%= cl_image_tag(@coffee.coffee_image.key, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if @coffee.coffee_image.attached? %>
+
+<section class='block m-3'>
+    <table class='table'>
+      <tr>
+        <td><%= 'Roast Type:' %></td>
+        <td><%= @coffee.roast_type %></td>
+      </tr>
+      <tr>
+        <td><%= 'Description:' %></td>
+        <td><%= @coffee.description %></td>
+      </tr>
+      <tr>
+        <td><%= 'Price:' %></td>
+        <td><%= @coffee.price %></td>
+      </tr>
+      <tr>
+        <td><%= 'Qty Availabile:' %></td>
+        <td><%= @coffee.quantity %></td>
+      </tr>
+      <tr>
+        <td><%= user_signed_in? && policy(Cart).new? ? link_to("Add to Cart", new_cart_path, class: 'button is-success') : '' %></td>
+      </tr>
+      </table>
+  </section>
+
+  

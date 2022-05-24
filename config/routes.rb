@@ -27,11 +27,12 @@ Rails.application.routes.draw do
   post 'coffees', to: 'coffees#create'
   get 'coffees/:id/edit', to: 'coffees#edit', as: 'edit_coffee'
   post 'coffees/:id/edit', to: 'coffees#update'
-  delete 'coffees/:id', to: 'coffees#destroy', as: 'coffee'
+  get 'coffees/:id/', to: 'coffees#show', as: 'coffee'
+  delete 'coffees/:id', to: 'coffees#destroy'
   patch '/coffees/:id', to: 'coffees#update'
 
   # Routes for Carts
-  get 'carts/new', to: 'carts#new', as: 'new_cart'
+  get 'coffees/:id/carts/new', to: 'carts#create', as: 'new_cart'
 
   root to: 'coffees#index'
 end

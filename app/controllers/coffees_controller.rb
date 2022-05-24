@@ -1,8 +1,11 @@
 class CoffeesController < ApplicationController
   before_action :set_coffee, only: [:show, :edit, :update, :destroy]
-  before_action :check_auth, except: [:index]
+  before_action :check_auth, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index]
   before_action :set_inventory, only: [:new, :create, :update, :destroy]
+
+  def show
+  end
 
   def new
     @coffee = @inventory.coffees.build
@@ -15,7 +18,7 @@ class CoffeesController < ApplicationController
       redirect_to @inventory
       flash[:notice] = 'Coffee added'
     else
-      flash.now[:notice] = @coffee.errors.full_messages.join('<br />').html_safe
+      flash[:notice] = @coffee.errors.full_messages.join('<br />').html_safe
       render 'new'
     end
   end
@@ -55,6 +58,6 @@ class CoffeesController < ApplicationController
   end
 
   def coffee_params
-    return params.require(:coffee).permit(:id, :name, :origin, :description, :price, :roast_type, :coffee_image, :quantity)
+    return params.require(:coffee).permit(:name, :origin, :description, :price, :roast_type, :coffee_image, :quantity)
   end
 end

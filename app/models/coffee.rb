@@ -1,5 +1,6 @@
 class Coffee < ApplicationRecord
   belongs_to :inventory
+  has_many :carts, dependent: :destroy
   has_many :profiles, through: :cart
 
   has_one_attached :coffee_image

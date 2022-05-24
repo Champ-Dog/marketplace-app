@@ -4,6 +4,7 @@ class Profile < ApplicationRecord
 
   has_many :addresses, dependent: :destroy
   has_one :inventory, dependent: :destroy
+  has_many :carts, dependent: :destroy
   has_many :coffees, through: :cart
 
   has_one_attached :profile_picture

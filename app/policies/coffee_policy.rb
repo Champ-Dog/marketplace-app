@@ -1,4 +1,8 @@
 class CoffeePolicy < ApplicationPolicy
+  def show?
+    true
+  end
+  
   def create?
    merchant?
   end
