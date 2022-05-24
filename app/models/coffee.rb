@@ -8,4 +8,5 @@ class Coffee < ApplicationRecord
   validates :origin, presence: true
   validates :price, presence: true
   validates :roast_type, presence: true
+  validates :quantity, presence: true
 end

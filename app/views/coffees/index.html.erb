@@ -10,7 +10,11 @@
         <p class='title is-flex is-justify-content-center'><%= "#{coffee.origin}" + " #{coffee.name}"  %></p>
         <p class='is-flex is-justify-content-center'><%= coffee.roast_type %></p>
         <p class='is-flex is-justify-content-center'><%= coffee.price %></p>
-        <div class='is-flex is-justify-content-center'><%= link_to("Add to Cart", root_path, class: 'button is-success') %></div>
+        
+        <%# Show purchasing options if user is signed in and has Customer account: %>
+        <div class='is-flex is-justify-content-center'>
+          <%= user_signed_in? && policy(Cart).new? ? link_to("Add to Cart", new_cart_path, class: 'button is-success') : '' %>
+        </div>
       </div>
     </div>
   <% end %>

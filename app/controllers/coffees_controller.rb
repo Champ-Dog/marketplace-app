@@ -1,6 +1,6 @@
 class CoffeesController < ApplicationController
   before_action :set_coffee, only: [:show, :edit, :update, :destroy]
-  before_action :check_auth
+  before_action :check_auth, except: [:index]
   before_action :authenticate_user!, except: [:index]
   before_action :set_inventory, only: [:new, :create, :update, :destroy]
 
@@ -55,6 +55,6 @@ class CoffeesController < ApplicationController
   end
 
   def coffee_params
-    return params.require(:coffee).permit(:id, :name, :origin, :description, :price, :roast_type, :coffee_image)
+    return params.require(:coffee).permit(:id, :name, :origin, :description, :price, :roast_type, :coffee_image, :quantity)
   end
 end

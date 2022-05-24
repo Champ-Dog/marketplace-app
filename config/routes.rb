@@ -30,5 +30,8 @@ Rails.application.routes.draw do
   delete 'coffees/:id', to: 'coffees#destroy', as: 'coffee'
   patch '/coffees/:id', to: 'coffees#update'
 
+  # Routes for Carts
+  get 'carts/new', to: 'carts#new', as: 'new_cart'
+
   root to: 'coffees#index'
 end

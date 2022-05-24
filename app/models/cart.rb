@@ -1,4 +1,4 @@
 class Cart < ApplicationRecord
-  belongs_to :profile_id
-  belongs_to :cofee_id
+  belongs_to :profile
+  belongs_to :coffee
 end

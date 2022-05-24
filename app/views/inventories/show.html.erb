@@ -16,6 +16,8 @@
     <%= coffee.description %><br />
     <%= 'Roast:' %>
     <%= coffee.roast_type %><br />
+    <%= 'Quantity:' %>
+    <%= coffee.quantity %><br />
     <div class='field'>
         <%= link_to('Edit', edit_coffee_path(coffee), class: 'button is-warning is-small') %>
         <%= button_to('Remove', coffee_path(coffee), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'button is-danger is-small') %>

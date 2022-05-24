@@ -1,8 +1,4 @@
 class CoffeePolicy < ApplicationPolicy
-  def index?
-    true
-  end
-
   def create?
    merchant?
   end

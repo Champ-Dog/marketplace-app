@@ -35,6 +35,13 @@
     </fieldset>
   </div>
 
+  <div class='field is-horizontal'>
+    <fieldset class='control'>
+      <%= f.label :quantity %>
+      <%= f.number_field :quantity, class: 'input' %>
+    </fieldset>
+  </div>
+
   <div class='field'>
     <div class='select'>
       <%= f.select(:roast_type, options_for_select([['Roast Style', nil], ['Espresso', 'Espresso'], ['Filter', 'Filter'], ['Omni', 'Omni']], 4)) %><br />
