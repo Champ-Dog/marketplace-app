@@ -1,0 +1,25 @@
+<h1>Your Cart</h1>
+
+<% @carts.each do |cart| %>
+  <section class='block m-3'>
+    <%= cl_image_tag(cart.coffee.coffee_image.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if cart.coffee.coffee_image.attached? %>
+    <table class='table'>
+      <tr>
+        <td><%= 'Coffee:' %></td>
+        <td><%= "#{cart.coffee.origin} #{cart.coffee.name}" %></td>
+      </tr>
+      <tr>
+        <td><%= 'Quantity:' %></td>
+        <td><%= cart.quantity %></td>
+      </tr>
+      <tr>
+        <td><%= 'Total Price:' %></td>
+        <td><%= cart.quantity * cart.coffee.price %></td>
+      </tr>
+      <tr>
+        <td><%= link_to("+1", class: 'button is-warning') %><%= link_to("-1", class: 'button is-warning') %></td>
+      </tr>
+      </table>
+      <%= button_to('Remove', cart_path(cart), method: :delete, class: 'button is-danger is-small') %>
+  </section>
+<% end %>

@@ -2,12 +2,13 @@
 # When a coffee is added to a cart, the coffee[:quantity] should be reduced by the value of cart[:quantity] (removing
 # that many coffees from circulation). 'Purchasing' should destroy cart/s associate with the user's profile
 class CartsController < ApplicationController
-  before_action :set_profile, only: [:new, :create]
+  before_action :set_profile, only: [:index, :new, :create]
   before_action :set_coffee, only: [:create]
+  before_action :set_cart, only: [:update, :destroy]
 
-  # def new
-  #   @cart = Cart.new
-  # end
+  def index
+    @carts = Cart.where("profile_id = #{@profile.id}")
+  end
 
   def create
     @cart = Cart.new
@@ -26,6 +27,12 @@ class CartsController < ApplicationController
     end
   end
 
+  def destroy
+    @cart.destroy
+    redirect_to carts_path
+    flash[:notice] = 'Item Removed'
+  end
+
   private
 
   def set_profile
@@ -34,6 +41,10 @@ class CartsController < ApplicationController
 
   def set_coffee
     @coffee = Coffee.find(params[:id])
+  end
+
+  def set_cart
+    @cart = Cart.find(params[:id])
   end
 
   def cart_params

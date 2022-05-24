@@ -29,6 +29,9 @@
           <div class="navbar-item">
             <%= button_to 'Logout', destroy_user_session_path, class: 'button is-warning is-small', method: :delete, form: { data: { turbo_confirm: "Are you sure you want to log out? " } } %>
           </div>
+          <div class="navbar-item">
+            <%= link_to("View Cart", carts_path, class: 'button is-success is-small') %>
+          </div>
         <% else %>
           <div class="navbar-item">
             <%= link_to 'Login', new_user_session_path, class: 'button is-primary is-small' %>

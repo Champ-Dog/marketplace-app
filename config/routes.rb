@@ -32,7 +32,9 @@ Rails.application.routes.draw do
   patch '/coffees/:id', to: 'coffees#update'
 
   # Routes for Carts
+  get 'carts', to: 'carts#index', as: 'carts'
   get 'coffees/:id/carts/new', to: 'carts#create', as: 'new_cart'
+  delete 'carts/:id', to: 'carts#destroy', as: 'cart'
 
   root to: 'coffees#index'
 end
