@@ -4,7 +4,7 @@ class AddressPolicy < ApplicationPolicy
   end
 
   def create?
-    return true if user.present?
+    return user.present?
   end
 
   def update?
@@ -18,7 +18,7 @@ class AddressPolicy < ApplicationPolicy
   private
 
   def owner?
-    return true if user.present? && user.profile == record.profile
+    return user.present? && user.profile == record.profile
   end
 
 

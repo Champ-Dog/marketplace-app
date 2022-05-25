@@ -22,6 +22,6 @@ class ProfilePolicy < ApplicationPolicy
   private
 
   def owner?
-    return true if user.present? && user == record.user
+    return user.present? && user == record.user
   end
 end

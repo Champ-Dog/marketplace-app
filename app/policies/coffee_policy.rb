@@ -22,7 +22,7 @@ class CoffeePolicy < ApplicationPolicy
   end
 
   def owner?
-    return true if user.present? && merchant? && user.profile.inventory == record.inventory
+    return user.present? && merchant? && user.profile.inventory == record.inventory
   end
 
 
