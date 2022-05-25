@@ -1,15 +1,16 @@
 <h1>Your Cart</h1>
 
-Display cart total
+<%# Display cart total and 'Checkout' %>
 <% total = 0 %>
 <% @carts.each do |cart| %>
   
   <% total += cart.quantity * cart.coffee.price %>
   <% end %>
 <h4>Total: <%= total %></h4>
+<%= button_to('Checkout', checkout_path, method: :delete, class: 'button is-danger is-small') %><br />
 
 <%# Tile formatting from Bulma to allow multiple displays per row %>
-<section class='tile is-ancestor is-flex-wrap-wrap is-justify-content-space-around">'>
+<section class='tile is-ancestor is-flex-wrap-wrap is-justify-content-space-around'>
 
   <%# Displays a table for each cart, with individual edit/remove buttons %>
   <% @carts.each do |cart| %>

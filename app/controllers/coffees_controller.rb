@@ -18,7 +18,7 @@ class CoffeesController < ApplicationController
       redirect_to @inventory
       flash[:notice] = 'Coffee added'
     else
-      flash[:notice] = @coffee.errors.full_messages.join('<br />').html_safe
+      flash[:alert] = @coffee.errors.full_messages.join('<br />').html_safe
       render 'new'
     end
   end
