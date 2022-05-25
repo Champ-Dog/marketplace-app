@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   # Routes for Carts
   get 'carts', to: 'carts#index', as: 'carts'
   get 'coffees/:id/carts/new', to: 'carts#create', as: 'new_cart'
+  patch 'carts/:id/+1', to: 'carts#increase', as: 'cart_increase'
+  patch 'carts/:id/-1', to: 'carts#decrease', as: 'cart_decrease'
   delete 'carts/:id', to: 'carts#destroy', as: 'cart'
 
   root to: 'coffees#index'

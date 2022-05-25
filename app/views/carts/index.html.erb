@@ -1,25 +1,52 @@
 <h1>Your Cart</h1>
 
+Display cart total
+<% total = 0 %>
 <% @carts.each do |cart| %>
-  <section class='block m-3'>
-    <%= cl_image_tag(cart.coffee.coffee_image.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if cart.coffee.coffee_image.attached? %>
-    <table class='table'>
-      <tr>
-        <td><%= 'Coffee:' %></td>
-        <td><%= "#{cart.coffee.origin} #{cart.coffee.name}" %></td>
-      </tr>
-      <tr>
-        <td><%= 'Quantity:' %></td>
-        <td><%= cart.quantity %></td>
-      </tr>
-      <tr>
-        <td><%= 'Total Price:' %></td>
-        <td><%= cart.quantity * cart.coffee.price %></td>
-      </tr>
-      <tr>
-        <td><%= link_to("+1", class: 'button is-warning') %><%= link_to("-1", class: 'button is-warning') %></td>
-      </tr>
-      </table>
-      <%= button_to('Remove', cart_path(cart), method: :delete, class: 'button is-danger is-small') %>
-  </section>
-<% end %>
+  
+  <% total += cart.quantity * cart.coffee.price %>
+  <% end %>
+<h4>Total: <%= total %></h4>
+
+<%# Tile formatting from Bulma to allow multiple displays per row %>
+<section class='tile is-ancestor is-flex-wrap-wrap is-justify-content-space-around">'>
+
+  <%# Displays a table for each cart, with individual edit/remove buttons %>
+  <% @carts.each do |cart| %>
+
+    <%# This requires multiple nested containers to display correctly %>
+    <div class='tile is-5 m-3 is-flex'>
+      <div class='is-child'>
+        <%= cl_image_tag(cart.coffee.coffee_image.key, crop: :scale, width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME']) if cart.coffee.coffee_image.attached? %>
+
+        <%# Creates 'table' effect for coffee information %>
+        <table class='table'>
+          <tr>
+            <td><%= "#{cart.coffee.origin} #{cart.coffee.name}" %></td>
+          </tr>
+          
+          <%# The Quantity section of the table requires different behaviour to house the adjustment buttons and current quantity display in visually acceptable style %>
+          <tr>
+            <td class='is-flex'>
+              <div class='is-flex is-align-items-center'>
+                <%= button_to("-1", cart_decrease_path(cart), method: :patch, class: 'button is-warning') %>
+                <div class='has-background-info-light p-5'>
+                  <%= cart.quantity %>
+                </div>
+                <%= button_to("+1", cart_increase_path(cart), method: :patch, class: 'button is-warning') %>
+                </td>
+              </div>
+          </tr>
+
+          <tr>
+            <td><%= "Price: $ #{(cart.quantity * cart.coffee.price)}" %></td>
+          </tr>
+
+          <tr>
+            <td><%= button_to('Remove', cart_path(cart), method: :delete, class: 'button is-danger is-small') %></td>  
+          </tr>
+        </table>
+      </div>
+    </div>
+  <% end %>
+</section>
