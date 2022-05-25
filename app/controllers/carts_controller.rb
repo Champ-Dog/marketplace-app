@@ -34,20 +34,20 @@ class CartsController < ApplicationController
       redirect_to carts_path
     else
       flash[:notice] = @cart.errors.full_messages.join('<br />').html_safe
-      redirect_to carts_path
+      redirect_back
     end
-  #   @cart.coffee.quantity += 1
-  #   redirect_to carts_path
   end
-  # def update
-  #   begin
-  #     @cart.update!(cart_params)
-  #     redirect_to carts_path
-  #   rescue StandardError => e
-  #     flash[:alert] = e
-  #     redirect_to carts_path
-  #   end
-  # end
+
+  def decrease
+    @cart.quantity -= 1
+    @cart.coffee.quantity += 1
+    if @cart.save && @cart.coffee.save
+      redirect_to carts_path
+    else
+      flash[:notice] = @cart.errors.full_messages.join('<br />').html_safe
+      redirect_back
+    end
+  end
 
   def destroy
     @cart.destroy
