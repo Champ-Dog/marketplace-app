@@ -5,8 +5,6 @@ class InventoriesController < ApplicationController
   before_action :set_inventory
 
   def show
-    # I need to change this so customers can view an inventory
-    # Or do I? I could do it under 'coffee#index' or similar somehow if I implement search?
     @inventory = current_user.profile.inventory
   end
 
