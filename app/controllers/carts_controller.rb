@@ -33,28 +33,48 @@ class CartsController < ApplicationController
     end
   end
 
-  # Increase and Decrease are custom methods allowing users to add or remove items from their cart, and adjusting the
-  # quantity of the involved coffee accordingly
-  def increase
-    @cart.quantity += 1
-    @cart.coffee.quantity -= 1
+  # Checks that sufficient quantity of coffee exists before increasing cart quantity
+  def stock?
+    @cart.coffee.quantity.positive?
+  end
+
+  # Checks that Cart and Coffee have successfully saved their new values before finishing increase/decrease method
+  def save?
     if @cart.save && @cart.coffee.save
       redirect_to carts_path
     else
       flash[:alert] = @cart.errors.full_messages.join('<br />').html_safe
-      redirect_back
+      return
     end
   end
 
-  def decrease
-    @cart.quantity -= 1
-    @cart.coffee.quantity += 1
-    if @cart.save && @cart.coffee.save
-      redirect_to carts_path
+  # Check to prevents users from removing the last coffee from a Cart; to prevent a '0' quantity
+  def not_last?
+    @cart.quantity > 1
+  end
+
+  # Increase and Decrease are custom methods allowing users to add or remove items from their cart, and adjusting the
+  # quantity of the involved coffee accordingly
+  def increase
+    if stock?
+      @cart.quantity += 1
+      @cart.coffee.quantity -= 1
     else
-      flash[:alert] = @cart.errors.full_messages.join('<br />').html_safe
-      redirect_back
+      flash[:alert] = "No more of this coffee is available"
     end
+
+    save?
+  end
+
+  def decrease
+    if not_last?
+      @cart.quantity -= 1
+      @cart.coffee.quantity += 1
+    else
+      flash[:alert] = "Can't decrease last item, please select Remove"
+    end
+
+    save?
   end
 
   # This is a custom method to delete a specific Cart record. To a user, this should appear to be removing a specific

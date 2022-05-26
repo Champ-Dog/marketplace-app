@@ -11,6 +11,5 @@ class Profile < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :name, presence: true
-  validates :contact_number, presence: true
-  # accepts_nested_attributes_for :addresses
+  validates :contact_number, presence: true, length: { in: 8..10  }
 end

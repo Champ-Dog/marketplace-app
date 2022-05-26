@@ -6,7 +6,7 @@
   
   <% total += cart.quantity * cart.coffee.price %>
   <% end %>
-<h4>Total: <%= total %></h4>
+<h4>Total: <%= total.round(2) %></h4>
 <%= button_to('Checkout', checkout_path, method: :delete, class: 'button is-danger is-small') %><br />
 
 <%# Tile formatting from Bulma to allow multiple displays per row %>
@@ -40,7 +40,7 @@
           </tr>
 
           <tr>
-            <td><%= "Price: $ #{(cart.quantity * cart.coffee.price)}" %></td>
+            <td><%= "Price: $ #{(cart.quantity * cart.coffee.price).round(2)}" %></td>
           </tr>
 
           <tr>

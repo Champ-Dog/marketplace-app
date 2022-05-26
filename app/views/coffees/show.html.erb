@@ -21,7 +21,7 @@
         <td><%= @coffee.quantity %></td>
       </tr>
       <tr>
-        <td><%= user_signed_in? && policy(Cart).new? ? link_to("Add to Cart", new_cart_path, class: 'button is-success') : '' %></td>
+        <td><%= user_signed_in? && policy(Cart).new? && @coffee.quantity.positive? ? link_to("Add to Cart", new_cart_path, class: 'button is-success') : '' %></td>
       </tr>
       </table>
   </section>
