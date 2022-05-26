@@ -24,7 +24,7 @@ buyer_profile = Profile.create(user_id: buyer[:id], username: 'Caffiend', name: 
 buyer_profile.add_role :customer
 
 # Populate the app with coffees
-roaster_profile.inventory.coffees.create(name: 'Kamwangi', origin: 'Kenya', roast_type: 'Omni', price: 21.00, quantity: 35)
-roaster_profile.inventory.coffees.create(name: 'Pedro Moreno', origin: 'Honduras', roast_type: 'Omni', price: 21.60, quantity: 35)
-seller_profile.inventory.coffees.create(name: 'Chelelektu', origin: 'Ethiopia', roast_type: 'Filter', price: 19.00, quantity: 50)
-seller_profile.inventory.coffees.create(name: 'La Esperanza', origin: 'Colombia', roast_type: 'Espresso', price: 22.00, quantity: 45)
+roaster_profile.inventory.coffee.create(name: 'Kamwangi', origin: 'Kenya', roast_type: 'Omni', price: 21.00, quantity: 35)
+roaster_profile.inventory.coffee.create(name: 'Pedro Moreno', origin: 'Honduras', roast_type: 'Omni', price: 21.60, quantity: 35)
+seller_profile.inventory.coffee.create(name: 'Chelelektu', origin: 'Ethiopia', roast_type: 'Filter', price: 19.00, quantity: 50)
+seller_profile.inventory.coffee.create(name: 'La Esperanza', origin: 'Colombia', roast_type: 'Espresso', price: 22.00, quantity: 45)
