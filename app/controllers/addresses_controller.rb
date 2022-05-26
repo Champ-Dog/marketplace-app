@@ -1,11 +1,8 @@
 class AddressesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_auth
-  before_action :set_profile, only: [:show, :new, :create, :update, :destroy]
-  before_action :set_address, only: [:show, :edit, :update, :destroy]
-  
-
-  # after_action :verify_authorized
+  before_action :set_profile, only: %i[show new create update destroy]
+  before_action :set_address, only: %i[show edit update destroy]
 
   def show
     redirect_to @profile

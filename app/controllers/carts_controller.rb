@@ -1,22 +1,25 @@
 # Carts are a joining table between Profiles and Coffees, and serve two main roles:
-# 1 - Simulating a typical 'shopping cart' from an online store, by providing a collection of all Cart records associated with their profile
+# 1 - Simulating a typical 'shopping cart' from an online store, by providing a collection of all Cart records
+# associated with their profile
 # 2 - Simulating purchases within the app
 # A user viewing their cart is actually seeing a collection of individual Cart records associated with their profile
 class CartsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_auth
-  before_action :set_profile, only: [:index, :new, :create, :checkout]
+  before_action :set_profile, only: %i[index new create checkout]
   before_action :set_coffee, only: [:create]
-  before_action :set_cart, only: [:increase, :decrease, :remove, :destroy]
-  
+  before_action :set_cart, only: %i[increase decrease remove destroy]
+
   # Users should only see carts belonging to them
   def index
     @carts = Cart.where("profile_id = #{@profile.id}")
   end
 
-  # Due to implementation (no forms, "Add to Cart" button), Cart creation requires special attention. This method creates
-  # a new Cart, and assigns it's attibrutes afterwards to associate it with the correct profile and coffee
-  # Creating also adjusts the available quantity of the appropriate Coffee
+  # Due to implementation (no forms, "Add to Cart" button), Cart creation requires special attention. This method
+  # creates a new Cart, and assigns it's attibrutes afterwards to associate it with the correct profile and coffee
+  # Creating also adjusts the available quantity of the appropriate Coffee. Calling 'increase' would be the preferred
+  # solution, but it will not recognise a valid Cart object if called within this method. However this should not be
+  # an issue, as the 'add to cart' button shouldn't be displayed unless there is at least 1 coffee available
   def create
     @cart = Cart.new
     @cart.profile = @profile
@@ -24,13 +27,7 @@ class CartsController < ApplicationController
     @cart.quantity = 1
     @cart.coffee.quantity -= 1
 
-    if @cart.save && @cart.coffee.save
-      redirect_to root_path
-      flash[:notice] = 'Added to cart'
-    else
-      flash[:alert] = @cart.errors.full_messages.join('<br />').html_safe
-      redirect_to root_path
-    end
+    save?
   end
 
   # Checks that sufficient quantity of coffee exists before increasing cart quantity
@@ -41,7 +38,7 @@ class CartsController < ApplicationController
   # Checks that Cart and Coffee have successfully saved their new values before finishing increase/decrease method
   def save?
     if @cart.save && @cart.coffee.save
-      redirect_to carts_path
+      redirect_back(fallback_location: root_path)
     else
       flash[:alert] = @cart.errors.full_messages.join('<br />').html_safe
       return
@@ -89,11 +86,7 @@ class CartsController < ApplicationController
       flash[:notice] = 'Item Removed'
     else
       flash[:alert] = @cart.errors.full_messages.join('<br />').html_safe
-      redirect_back
     end
-  end
-
-  def destroy
   end
 
   # Payment has not been implemented. This method mimics purchasing all items by destroying all Carts associated with a
@@ -105,7 +98,6 @@ class CartsController < ApplicationController
     end
     flash[:notice] = 'Purchase Successful'
     redirect_to carts_path
-
   end
 
   private

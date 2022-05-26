@@ -1,8 +1,8 @@
 class CoffeesController < ApplicationController
-  before_action :set_coffee, only: [:show, :edit, :update, :destroy]
-  before_action :check_auth, except: [:index, :new, :create]
+  before_action :set_coffee, only: %i[show edit update destroy]
+  before_action :check_auth, except: %i[index new create]
   before_action :authenticate_user!, except: [:index]
-  before_action :set_inventory, only: [:new, :create, :update, :destroy]
+  before_action :set_inventory, only: %i[new create update destroy]
 
   def show
   end
@@ -41,7 +41,7 @@ class CoffeesController < ApplicationController
     @coffee.destroy
     redirect_to @inventory
     flash[:notice] = 'Coffee Removed'
-  end 
+  end
 
   private
 
