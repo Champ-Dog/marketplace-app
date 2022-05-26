@@ -14,8 +14,8 @@ seller_profile.create_inventory!
 roaster = User.create(email: 'roaster@hopper.com', password: 'roaster123')
 roaster_profile = Profile.create(user_id: roaster[:id], username: 'Coffee Merchants', name: 'Toby Wilson',
                                  contact_number: '0123456789')
-seller_profile.add_role :merchant
-seller_profile.create_inventory!
+roaster_profile.add_role :merchant
+roaster_profile.create_inventory!
 
 # Create Customer user account
 buyer = User.create(email: 'buyer@hopper.com', password: 'buyer123')
