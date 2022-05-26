@@ -30,7 +30,7 @@
             <%= button_to 'Logout', destroy_user_session_path, class: 'button is-warning is-small', method: :delete, form: { data: { turbo_confirm: "Are you sure you want to log out? " } } %>
           </div>
           <div class="navbar-item">
-            <%= link_to("View Cart", carts_path, class: 'button is-success is-small') if @profile.has_role? :customer%>
+            <%= link_to("View Cart", carts_path, class: 'button is-success is-small') if current_user.profile.has_role? :customer%>
           </div>
         <% else %>
           <div class="navbar-item">
