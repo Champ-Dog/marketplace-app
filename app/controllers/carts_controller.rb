@@ -115,7 +115,7 @@ class CartsController < ApplicationController
   end
 
   def set_cart
-    @cart = Cart.find(params[:id])
+    @cart = policy_scope(Cart).find(params[:id])
   end
 
   def cart_params

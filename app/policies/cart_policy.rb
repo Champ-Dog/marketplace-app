@@ -36,18 +36,13 @@ class CartPolicy < ApplicationPolicy
 
   private
 
-  def owner?
-    return user.present? && user.profile == record.profile
-  end
-  
   def customer?
     return user.present? && user.profile.has_role?(:customer)
   end
 
-
   class Scope < Scope
     attr_reader :user, :scope
-    # NOTE: Be explicit about which records you allow access to!
+
     def resolve
       scope.where(profile_id: @user.profile[:id])
     end

@@ -1,12 +1,8 @@
 class AddressesController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_auth
   before_action :set_profile, only: %i[show new create update destroy]
   before_action :set_address, only: %i[show edit update destroy]
-
-  def show
-    redirect_to @profile
-  end
+  before_action :check_auth
 
   def new
     @address = @profile.addresses.build
@@ -24,17 +20,12 @@ class AddressesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
-    begin
       @address.update!(address_params)
       redirect_to @profile
     rescue StandardError => e
       flash[:alert] = e
       render 'edit'
-    end
   end
 
   def destroy
@@ -54,7 +45,7 @@ class AddressesController < ApplicationController
   end
 
   def set_address
-    @address = Address.find(params[:id])
+    @address = policy_scope(Address).find(params[:id])
   end
 
   def address_params

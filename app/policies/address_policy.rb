@@ -1,6 +1,6 @@
 class AddressPolicy < ApplicationPolicy
   def show?
-    owner?
+    return user.present?
   end
 
   def create?
@@ -8,23 +8,18 @@ class AddressPolicy < ApplicationPolicy
   end
 
   def update?
-    owner?
+    return user.present?
   end
 
   def destroy?
-    owner?
-  end
-
-  private
-
-  def owner?
-    return user.present? && user.profile == record.profile
+    return user.present?
   end
 
   class Scope < Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    attr_reader :user, :scope
+
+    def resolve
+      scope.where(profile_id: @user.profile[:id])
+    end
   end
 end

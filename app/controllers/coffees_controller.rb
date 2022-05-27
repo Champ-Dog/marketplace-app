@@ -1,7 +1,7 @@
 class CoffeesController < ApplicationController
-  before_action :set_coffee, only: %i[show edit update destroy]
-  before_action :check_auth, except: %i[index new create]
+  before_action :check_auth, except: %i[index]
   before_action :authenticate_user!, except: [:index]
+  before_action :set_coffee, only: %i[show edit update destroy]
   before_action :set_inventory, only: %i[new create update destroy]
 
   def show
@@ -27,13 +27,11 @@ class CoffeesController < ApplicationController
   end
 
   def update
-    begin
       @coffee.update!(coffee_params)
       redirect_to @inventory
     rescue StandardError => e
       flash[:alert] = e
       render 'edit'
-    end
   end
 
   def destroy
@@ -54,7 +52,7 @@ class CoffeesController < ApplicationController
   end
 
   def check_auth
-    authorize @coffee
+    authorize Coffee
   end
 
   def coffee_params

@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   get 'addresses/new', to: 'addresses#new', as: 'new_address'
   post 'addresses', to: 'addresses#create'
   get 'addresses/:id/edit', to: 'addresses#edit', as: 'edit_address'
-  get 'addresses/:id', to: 'addresses#show', as: 'address'
+  patch '/addresses/:id', to: 'addresses#update', as: 'address'
   delete 'addresses/:id', to: 'addresses#destroy'
-  patch '/addresses/:id', to: 'addresses#update'
+  
 
   # Routes for Inventories. These *only* need to be created.
   get 'inventories/:id', to: 'inventories#show', as: 'inventory'

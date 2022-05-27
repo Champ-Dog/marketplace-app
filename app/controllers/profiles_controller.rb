@@ -39,14 +39,12 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    begin
-     @profile.update!(profile_params)
+      @profile.update!(profile_params)
       flash[:notice] = 'Details Updated!'
       redirect_to @profile
-    rescue
-      flash[:alert] = @profile.errors.full_messages.join('<br>').html_safe
+    rescue StandardError => e
+      flash[:alert] = e
       render 'edit'
-    end
   end
 
   def destroy
